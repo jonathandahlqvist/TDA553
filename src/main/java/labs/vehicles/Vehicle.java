@@ -13,8 +13,8 @@ public abstract class Vehicle extends Element implements Movable {
     private final double enginePower; // Engine power of the car
     private double currentSpeed; // The current speed of the car
     private Color clr; // Color of the car
-    private final Point2D.Double position;
-    private int direction; // north = 0, east = 1, south = 2, west = 3
+    private int direction;
+    private boolean engineOn;// north = 0, east = 1, south = 2, west = 3
 
     public Vehicle(int nrDoors, double enginePower, Color clr, double x, double y){
         super(x, y);
@@ -22,8 +22,7 @@ public abstract class Vehicle extends Element implements Movable {
         this.enginePower = enginePower;
         this.currentSpeed = 0;
         this.clr = clr;
-        this.position = new Point2D.Double(x, y);
-        this.direction = 0;
+        this.direction = 1;
         stopEngine();
     }
 
@@ -80,20 +79,25 @@ public abstract class Vehicle extends Element implements Movable {
 
     public void startEngine(){
         currentSpeed = 0.1;
+        engineOn = true;
     }
 
     public void stopEngine(){
-        setCurrentSpeed(0); }
+        setCurrentSpeed(0);
+        engineOn = false;
+    }
 
     public int getDirection() {
         return direction;
     }
 
     public void gas(double amount){
-        if (amount >= 0 && amount <= 1) {
-            incrementSpeed(amount);
-        } else if (amount > 1) {
-            incrementSpeed(1);
+        if (engineOn) {
+            if (amount >= 0 && amount <= 1) {
+                incrementSpeed(amount);
+            } else if (amount > 1) {
+                incrementSpeed(1);
+            }
         }
     }
 

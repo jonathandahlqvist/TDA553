@@ -28,6 +28,19 @@ public class RepairShop<T extends Vehicle> extends Element {
         return capacity;
     }
 
+    public boolean checkCompatibility(Vehicle car) {
+        return supportedType.isInstance(car);
+    }
+
+    public boolean tryAddVehicle(Vehicle car) {
+        if (checkCompatibility(car)) {
+            car.stopEngine();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void addVehicle(T v) {
         if (loaded.size() >= capacity) {
             throw new IllegalStateException("Repair shop is full");

@@ -69,6 +69,14 @@ public class Controller {
                 int y = (int) Math.round(car.getY());
                 int direction = car.getDirection();
 
+                for (RepairShop<? extends Vehicle> workshop : workshops) {
+                    if (car.getX() >= workshop.getX() - 25 && car.getX() <= workshop.getX() + 25 &&
+                            car.getY() >= workshop.getY() - 25 && car.getY() <= workshop.getY() + 25
+                        && !(workshop.getLoaded().contains(car))) {
+                            workshop.tryAddVehicle(car);
+                    }
+                }
+
                 if (
                         (y > lowerBorder-car.getCurrentSpeed() && direction == 0) ||
                         (y < car.getCurrentSpeed() && direction == 2) ||
