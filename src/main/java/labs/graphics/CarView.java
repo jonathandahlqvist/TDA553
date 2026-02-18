@@ -1,4 +1,4 @@
-package labs.lab3;
+package labs.graphics;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -56,8 +56,6 @@ public class CarView extends JFrame{
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
-
-
 
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value

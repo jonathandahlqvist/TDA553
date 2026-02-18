@@ -1,4 +1,4 @@
-package labs.lab3;
+package labs.graphics;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -54,8 +54,10 @@ public class DrawPanel extends JPanel{
 
     // TODO: Make this general for all cars
     void moveit(int x, int y){
-        volvoPoint.x = x;
-        volvoPoint.y = y;
+        for (ImagePoint vehicle : vehicles){
+            vehicle.setX(x);
+            vehicle.setY(y);
+        }
     }
 
     // Initializes the panel and reads the images

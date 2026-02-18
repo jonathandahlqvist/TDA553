@@ -1,8 +1,12 @@
-package labs.lab3;
+package labs.graphics;
 
-import labs.*;
+import labs.vehicles.Saab95;
+import labs.vehicles.Scania;
+import labs.vehicles.Vehicle;
+import labs.vehicles.Volvo240;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,10 +26,11 @@ public class CarController {
     // each step between delays.
     private Timer timer = new Timer(delay, new TimerListener());
 
+
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    // ArrayList<ACar> cars = new ArrayList<>();
+    ArrayList<Vehicle> cars = new ArrayList<>();
 
     //methods:
 
@@ -33,7 +38,9 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        // cc.cars.add(new Volvo240());
+        cc.cars.add(new Volvo240(Color.red, 0,0));
+        cc.cars.add(new Saab95(Color.blue, 0, 100));
+        cc.cars.add(new Scania(Color.red, 0, 200));
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -78,16 +85,22 @@ public class CarController {
                 frame.drawPanel.moveit(x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
-            }*/
+            }
         }
     }
 
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-       /* for (ACar car : cars
-                ) {
+       for (Vehicle car : cars) {
             car.gas(gas);
-        }*/
+        }
+    }
+
+    void brake(int amount) {
+        double brake = ((double) amount) / 100;
+        for (Vehicle car : cars){
+            car.brake(brake);
+        }
     }
 }
