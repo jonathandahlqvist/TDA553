@@ -10,7 +10,7 @@ public abstract class Vehicle implements Movable {
     private final Point2D.Double position;
     private int direction; // north = 0, east = 1, south = 2, west = 3
 
-    public Vehicle(int nrDoors, double enginePower, Color clr){
+    public Vehicle(int nrDoors, double enginePower, Color clr, double x, double y){
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.currentSpeed = 0;

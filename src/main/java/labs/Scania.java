@@ -5,8 +5,8 @@ import java.awt.*;
 public class Scania extends Vehicle {
     private final TruckBed truckbed;
 
-    public Scania(Color clr){
-        super(2,420,clr);
+    public Scania(Color clr, double x, double y){
+        super(2,420,clr, x, y);
         truckbed = new TruckBed();
     }
 
