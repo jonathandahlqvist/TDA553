@@ -13,7 +13,7 @@ public class RepairShopTest {
 
     @BeforeEach
     void setUp() {
-        vehicleshop = new RepairShop<>(1);
+        vehicleshop = new RepairShop<>(1, Vehicle.class);
         volvo = new Volvo240(Color.cyan, 0, 0);
         saab = new Saab95(Color.orange, 0, 0);
     }

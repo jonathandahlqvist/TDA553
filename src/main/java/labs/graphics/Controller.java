@@ -1,9 +1,6 @@
 package labs.graphics;
 
-import labs.vehicles.Saab95;
-import labs.vehicles.Scania;
-import labs.vehicles.Vehicle;
-import labs.vehicles.Volvo240;
+import labs.vehicles.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +14,7 @@ import java.util.ArrayList;
 * modifying the model state and the updating the view.
  */
 
-public class CarController {
+public class Controller {
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -29,18 +26,20 @@ public class CarController {
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
-    // A list of cars, modify if needed
     ArrayList<Vehicle> cars = new ArrayList<>();
-
+    ArrayList<RepairShop<? extends Vehicle>> workshops = new ArrayList<>();
     //methods:
 
     public static void main(String[] args) {
         // Instance of this class
-        CarController cc = new CarController();
+        Controller cc = new Controller();
 
         cc.cars.add(new Volvo240(Color.red, 0,0));
         cc.cars.add(new Saab95(Color.blue, 0, 100));
         cc.cars.add(new Scania(Color.red, 0, 200));
+        RepairShop<Volvo240> volvoWorkshop = new RepairShop<>(100, 300, 0, Volvo240.class);
+        volvoWorkshop.setImage("pics/VolvoBrand.jpg");
+        cc.workshops.add(volvoWorkshop);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -82,7 +81,6 @@ public class CarController {
                     car.startEngine();
                 }
 
-                frame.drawPanel.moveit(x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
@@ -103,4 +101,36 @@ public class CarController {
             car.brake(brake);
         }
     }
-}
+
+    void turboOn() {
+        for (Vehicle car : cars) {
+            if (car instanceof Saab95) {
+                ((Saab95) car).setTurboOn();
+            }
+        }
+    }
+    void turboOff() {
+        for (Vehicle car : cars) {
+            if (car instanceof Saab95) {
+                ((Saab95) car).setTurboOff();
+            }
+        }
+    }
+    void changeAngle(int degrees) {
+        for (Vehicle car : cars) {
+            if (car instanceof Scania) {
+                ((Scania) car).changeAngle(degrees);
+            }
+        }
+    }
+
+    void startCars() {
+        for (Vehicle car : cars) {
+            car.startEngine();
+        }
+    }
+    void stopCars() {
+        for (Vehicle car : cars) {
+            car.stopEngine();
+        }
+    }}

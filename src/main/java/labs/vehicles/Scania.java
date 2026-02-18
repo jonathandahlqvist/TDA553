@@ -7,6 +7,7 @@ public class Scania extends Vehicle {
 
     public Scania(Color clr, double x, double y){
         super(2,420,clr, x, y);
+        setImage("pics/Scania.jpg");
         truckbed = new TruckBed();
     }
 

@@ -8,6 +8,7 @@ public class Saab95 extends Vehicle {
 
     public Saab95(Color clr, double x, double y){
         super(2, 125, clr, x, y);
+        setImage("pics/Saab95.jpg");
         turboOn = false;
     }
 

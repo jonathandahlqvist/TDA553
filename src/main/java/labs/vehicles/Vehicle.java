@@ -1,9 +1,14 @@
 package labs.vehicles;
 
+import labs.graphics.DrawPanel;
+
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
-public abstract class Vehicle implements Movable {
+public abstract class Vehicle extends Element implements Movable {
     private final int nrDoors; // Number of doors on the car
     private final double enginePower; // Engine power of the car
     private double currentSpeed; // The current speed of the car
@@ -12,6 +17,7 @@ public abstract class Vehicle implements Movable {
     private int direction; // north = 0, east = 1, south = 2, west = 3
 
     public Vehicle(int nrDoors, double enginePower, Color clr, double x, double y){
+        super(x, y);
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.currentSpeed = 0;
@@ -60,24 +66,8 @@ public abstract class Vehicle implements Movable {
         return currentSpeed;
     }
 
-    public double getX() {
-        return position.x;
-    }
-
-    public double getY() {
-        return position.y;
-    }
-
     public Color getColor(){
         return clr;
-    }
-
-    protected void setX(double x) {
-        position.x = x;
-    }
-
-    protected void setY(double y) {
-        position.y = y;
     }
 
     protected void setColor(Color clr) {

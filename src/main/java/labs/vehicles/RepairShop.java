@@ -1,14 +1,22 @@
 package labs.vehicles;
 
-
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
-public class RepairShop<T extends Vehicle> {
+public class RepairShop<T extends Vehicle> extends Element {
+    private final Class<T> supportedType;
     private final int capacity;
     private ArrayList<T> loaded;
 
-    public RepairShop(int capacity) {
+    public RepairShop(int capacity, Class<T> supportedType) {
+        this(capacity, 0, 0, supportedType); // Default position
+    }
+
+
+    public RepairShop(int capacity, double x, double y, Class<T> supportedType) {
+        super(x, y);
         this.capacity = capacity;
+        this.supportedType = supportedType;
         loaded = new ArrayList<>();
     }
 
