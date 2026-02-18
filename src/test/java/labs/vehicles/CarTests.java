@@ -1,4 +1,4 @@
-package labs;
+package labs.vehicles;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,8 +11,8 @@ class CarTests {
 
     @BeforeEach
     void setUp() {
-        volvo = new Volvo240(Color.black);
-        saab = new Saab95(Color.red);
+        volvo = new Volvo240(Color.black, 0, 0);
+        saab = new Saab95(Color.red, 0, 0);
     }
 
     @Test
@@ -89,7 +89,7 @@ class CarTests {
     @Test
     void testBrakeVolvoMore1() {
         volvo.setCurrentSpeed(10);
-        volvo.brake(100);
+        volvo.brake(1);
         assertEquals(10-1*1.25, volvo.getCurrentSpeed());
     }
     @Test
@@ -186,8 +186,8 @@ class CarTests {
             volvo.move();
             volvo.turnRight();
         }
-        assertEquals(0, volvo.getPosition()[0]);
-        assertEquals(0, volvo.getPosition()[1]);
+        assertEquals(0, volvo.getX());
+        assertEquals(0, volvo.getY());
 
     }
 

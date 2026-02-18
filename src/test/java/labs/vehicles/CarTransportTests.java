@@ -1,4 +1,4 @@
-package labs;
+package labs.vehicles;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.awt.*;
@@ -12,9 +12,9 @@ public class CarTransportTests {
 
     @BeforeEach
     void setUp() {
-        cartransport = new CarTransport(2, 4206967, Color.green);
-        volvo = new Volvo240(Color.cyan);
-        saab = new Saab95(Color.orange);
+        cartransport = new CarTransport(2, 4206967, Color.green, 0, 0);
+        volvo = new Volvo240(Color.cyan, 0, 0);
+        saab = new Saab95(Color.orange, 0, 0);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class CarTransportTests {
 
     @Test
     void testLoadCarTransport() {
-        CarTransport cartransport2 = new CarTransport(2, 4206967, Color.green);
+        CarTransport cartransport2 = new CarTransport(2, 4206967, Color.green, 0, 0 );
         assertThrows(IllegalArgumentException.class, () -> cartransport.addCar(cartransport2));
     }
 }

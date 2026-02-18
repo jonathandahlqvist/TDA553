@@ -1,4 +1,4 @@
-package labs;
+package labs.vehicles;
 
 public class Ramp {
     private boolean lowered;

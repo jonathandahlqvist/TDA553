@@ -1,4 +1,4 @@
-package labs;
+package labs.vehicles;
 
 import java.awt.*;
 import java.util.Stack;
@@ -65,7 +65,8 @@ public class CarTransport extends Vehicle {
     public void move() {
         super.move();
         for (Vehicle p: parkedCars) {
-            p.setPosition(pos[0], pos[1]);
+            p.setX(this.getX());
+            p.setY(this.getY());
         }
     }
 

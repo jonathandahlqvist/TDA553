@@ -1,6 +1,7 @@
-package labs;
+package labs.vehicles;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 
 public abstract class Vehicle implements Movable {
     private final int nrDoors; // Number of doors on the car
@@ -15,7 +16,7 @@ public abstract class Vehicle implements Movable {
         this.enginePower = enginePower;
         this.currentSpeed = 0;
         this.clr = clr;
-        this.position = new Point2D.Double(0.0,0.0);
+        this.position = new Point2D.Double(x, y);
         this.direction = 0;
         stopEngine();
     }
@@ -23,16 +24,16 @@ public abstract class Vehicle implements Movable {
     public void move() {
         switch (direction) {
             case 0:
-                y+=currentSpeed;
+                position.y += currentSpeed;
                 break;
             case 1:
-                x+=currentSpeed;
+                position.x += currentSpeed;
                 break;
             case 2:
-                y-=currentSpeed;
+                position.y -= currentSpeed;
                 break;
             case 3:
-                x-=currentSpeed;
+                position.x-= currentSpeed;
                 break;
         }
     }
@@ -92,9 +93,9 @@ public abstract class Vehicle implements Movable {
     }
 
     public void stopEngine(){
-        currentSpeed = 0; }
+        setCurrentSpeed(0); }
 
-    public double getDirection() {
+    public int getDirection() {
         return direction;
     }
 

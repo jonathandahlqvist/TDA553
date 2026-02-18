@@ -1,4 +1,4 @@
-package labs;
+package labs.vehicles;
 
 public interface Movable {
     void move();

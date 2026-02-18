@@ -1,4 +1,4 @@
-package labs;
+package labs.vehicles;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.awt.*;
@@ -9,20 +9,20 @@ public class ScaniaTests {
 
     @BeforeEach
     void setUp(){
-        scania = new Scania(Color.green);
+        scania = new Scania(Color.green, 0, 0);
     }
 
     @Test
     void testChangeAngleTooMuch(){
         scania.changeAngle(100);
-        assertEquals(70, scania.getTruckBed().getAngle());
+        assertEquals(70, scania.getAngle());
     }
 
     @Test
     void testOpenBedWhileDriving(){
         scania.setCurrentSpeed(10);
         scania.changeAngle(20);
-        assertEquals(0,scania.getTruckBed().getAngle());
+        assertEquals(0,scania.getAngle());
     }
 
     @Test

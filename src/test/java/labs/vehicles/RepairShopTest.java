@@ -1,4 +1,4 @@
-package labs;
+package labs.vehicles;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,8 +14,8 @@ public class RepairShopTest {
     @BeforeEach
     void setUp() {
         vehicleshop = new RepairShop<>(1);
-        volvo = new Volvo240(Color.cyan);
-        saab = new Saab95(Color.orange);
+        volvo = new Volvo240(Color.cyan, 0, 0);
+        saab = new Saab95(Color.orange, 0, 0);
     }
 
     @Test

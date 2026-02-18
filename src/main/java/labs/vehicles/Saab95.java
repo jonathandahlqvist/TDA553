@@ -1,4 +1,4 @@
-package labs;
+package labs.vehicles;
 
 import java.awt.*;
 

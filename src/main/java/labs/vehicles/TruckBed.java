@@ -1,4 +1,4 @@
-package labs;
+package labs.vehicles;
 
 public class TruckBed {
     private int angle;

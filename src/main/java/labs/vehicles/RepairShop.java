@@ -1,4 +1,4 @@
-package labs;
+package labs.vehicles;
 
 
 import java.util.ArrayList;
@@ -32,7 +32,9 @@ public class RepairShop<T extends Vehicle> {
         if (loaded.isEmpty()) {
             throw new IllegalStateException("Repair shop is empty");
         }
-
+        if (!loaded.contains(v)) {
+            throw new IllegalArgumentException("Car is not in repair shop");
+        }
         loaded.remove(v);
     }
 }
