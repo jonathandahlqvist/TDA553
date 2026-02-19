@@ -51,6 +51,7 @@ public class CarTransport extends Vehicle {
     public Stack<Vehicle> getParkedCars() {
         return parkedCars;
     }
+
     public void removeCar(){
         if (!ramp.isLowered()) {
             throw new IllegalStateException("Ramp is not lowered");

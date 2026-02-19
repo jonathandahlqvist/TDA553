@@ -15,8 +15,6 @@ import java.util.ArrayList;
  */
 
 public class Controller {
-    // member fields:
-
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
@@ -71,8 +69,7 @@ public class Controller {
 
                 for (RepairShop<? extends Vehicle> workshop : workshops) {
                     if (car.getX() >= workshop.getX() - 25 && car.getX() <= workshop.getX() + 25 &&
-                            car.getY() >= workshop.getY() - 25 && car.getY() <= workshop.getY() + 25
-                        && !(workshop.getLoaded().contains(car))) {
+                            car.getY() >= workshop.getY() - 25 && car.getY() <= workshop.getY() + 25) {
                             workshop.tryAddVehicle(car);
                     }
                 }

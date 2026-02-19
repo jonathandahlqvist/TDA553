@@ -1,12 +1,6 @@
 package labs.vehicles;
 
-import labs.graphics.DrawPanel;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public abstract class Vehicle extends Element implements Movable {
     private final int nrDoors; // Number of doors on the car
@@ -15,6 +9,7 @@ public abstract class Vehicle extends Element implements Movable {
     private Color clr; // Color of the car
     private int direction;
     private boolean engineOn;// north = 0, east = 1, south = 2, west = 3
+    private boolean isLoaded;
 
     public Vehicle(int nrDoors, double enginePower, Color clr, double x, double y){
         super(x, y);
@@ -23,6 +18,7 @@ public abstract class Vehicle extends Element implements Movable {
         this.currentSpeed = 0;
         this.clr = clr;
         this.direction = 1;
+        this.isLoaded = false;
         stopEngine();
     }
 
@@ -78,8 +74,10 @@ public abstract class Vehicle extends Element implements Movable {
     }
 
     public void startEngine(){
-        currentSpeed = 0.1;
-        engineOn = true;
+        if (!isLoaded && !engineOn) {
+            currentSpeed = 0.1;
+            engineOn = true;
+        }
     }
 
     public void stopEngine(){
@@ -89,6 +87,18 @@ public abstract class Vehicle extends Element implements Movable {
 
     public int getDirection() {
         return direction;
+    }
+
+    public void load() {
+        isLoaded = true;
+    }
+
+    public void unload() {
+        isLoaded = false;
+    }
+
+    public boolean getIsLoaded() {
+        return isLoaded;
     }
 
     public void gas(double amount){
@@ -116,6 +126,5 @@ public abstract class Vehicle extends Element implements Movable {
     private void decrementSpeed(double amount) {
         setCurrentSpeed(Math.max((getCurrentSpeed() - speedFactor() * amount),0));
     }
-
 
 }

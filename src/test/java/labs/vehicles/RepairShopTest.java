@@ -20,8 +20,8 @@ public class RepairShopTest {
 
     @Test
     void testOvercapacityException() {
-        vehicleshop.addVehicle(volvo);
-        assertThrows(IllegalStateException.class, () -> vehicleshop.addVehicle(saab));
+        vehicleshop.tryAddVehicle(volvo);
+        assertThrows(IllegalStateException.class, () -> vehicleshop.tryAddVehicle(saab));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class RepairShopTest {
 
     @Test
     void removeCarNotInShop() {
-        vehicleshop.addVehicle(volvo);
+        vehicleshop.tryAddVehicle(volvo);
         assertThrows(IllegalArgumentException.class, () -> vehicleshop.removeVehicle(saab));
     }
 }
