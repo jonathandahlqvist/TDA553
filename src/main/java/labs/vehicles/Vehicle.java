@@ -9,7 +9,7 @@ public abstract class Vehicle extends Element implements Movable {
     private Color clr; // Color of the car
     private int direction;
     private boolean engineOn;// north = 0, east = 1, south = 2, west = 3
-    private boolean isLoaded;
+    private VehicleState state;
 
     public Vehicle(int nrDoors, double enginePower, Color clr, double x, double y){
         super(x, y);
@@ -18,11 +18,45 @@ public abstract class Vehicle extends Element implements Movable {
         this.currentSpeed = 0;
         this.clr = clr;
         this.direction = 1;
-        this.isLoaded = false;
+        this.state = new OnRoad();
         stopEngine();
     }
 
+
+    //Base methods
+    public void gas(double amount){
+        state.gas(this, amount);
+    }
+
+    public void brake(double amount) {
+        state.brake(this, amount);
+    }
+
     public void move() {
+        state.move(this);
+    }
+
+    public void turnLeft() {
+        state.turnLeft(this);
+    }
+
+    public void turnRight() {
+        state.turnRight(this);
+    }
+
+
+
+
+    // Internal helper methods
+    protected void rotateLeft() {
+        direction = (direction + 3) % 4;
+    }
+
+    protected void rotateRight() {
+        direction = (direction + 1) % 4;
+    }
+
+    protected void moveNormally() {
         switch (direction) {
             case 0:
                 position.y += currentSpeed;
@@ -39,15 +73,22 @@ public abstract class Vehicle extends Element implements Movable {
         }
     }
 
-    public void turnLeft() {
-        direction = (direction + 3) % 4;
+    protected void incrementSpeed(double amount) {
+        setCurrentSpeed(Math.min((getCurrentSpeed() + speedFactor() * amount), getEnginePower()));
     }
 
-    public void turnRight() {
-        direction = (direction + 1) % 4;
+    protected void decrementSpeed(double amount) {
+        setCurrentSpeed(Math.max((getCurrentSpeed() - speedFactor() * amount),0));
     }
 
     protected abstract double speedFactor();
+
+
+
+    //Getters
+    public VehicleState getState() {
+        return state;
+    }
 
     public int getNrDoors(){
         return nrDoors;
@@ -57,12 +98,23 @@ public abstract class Vehicle extends Element implements Movable {
         return enginePower;
     }
 
+    public boolean isEngineOn() {
+        return engineOn;
+    }
+
     public double getCurrentSpeed(){
         return currentSpeed;
     }
 
     public Color getColor(){
         return clr;
+    }
+
+
+
+    //Setters
+    public void setState(VehicleState state){
+        this.state = state;
     }
 
     protected void setColor(Color clr) {
@@ -74,7 +126,7 @@ public abstract class Vehicle extends Element implements Movable {
     }
 
     public void startEngine(){
-        if (!isLoaded && !engineOn) {
+        if (state instanceof OnRoad && !engineOn) {
             currentSpeed = 0.1;
             engineOn = true;
         }
@@ -89,42 +141,5 @@ public abstract class Vehicle extends Element implements Movable {
         return direction;
     }
 
-    public void load() {
-        isLoaded = true;
-    }
-
-    public void unload() {
-        isLoaded = false;
-    }
-
-    public boolean getIsLoaded() {
-        return isLoaded;
-    }
-
-    public void gas(double amount){
-        if (engineOn) {
-            if (amount >= 0 && amount <= 1) {
-                incrementSpeed(amount);
-            } else if (amount > 1) {
-                incrementSpeed(1);
-            }
-        }
-    }
-
-    public void brake(double amount) {
-        if (amount >= 0 && amount <= 1) {
-            decrementSpeed(amount);
-        } else if (amount > 1) {
-            decrementSpeed(1);
-        }
-    }
-
-    private void incrementSpeed(double amount) {
-        setCurrentSpeed(Math.min((getCurrentSpeed() + speedFactor() * amount), getEnginePower()));
-    }
-
-    private void decrementSpeed(double amount) {
-        setCurrentSpeed(Math.max((getCurrentSpeed() - speedFactor() * amount),0));
-    }
 
 }

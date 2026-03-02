@@ -27,34 +27,32 @@ public class RepairShop<T extends Vehicle> extends Element {
         return capacity;
     }
 
+    public Class<T> getSupportedType() {
+        return supportedType;
+    }
+
     private boolean checkCompatibility(Vehicle car) {
         return supportedType.isInstance(car);
     }
 
     public void tryAddVehicle(Vehicle car) {
-        if (checkCompatibility(car) && !(car.getIsLoaded())) {
+        if (checkCompatibility(car) && !(car.getState() instanceof InShop)) {
             if (loaded.size() < capacity) {
                 addVehicle(supportedType.cast(car));
-            } else {
-                throw new IllegalStateException("Repair shop is full");
             }
         }
     }
 
     private void addVehicle(T v) {
         v.stopEngine();
-        v.load();
         loaded.add(v);
+        v.setState(new InShop());
     }
 
     public void removeVehicle(T v) {
-        if (loaded.isEmpty()) {
-            throw new IllegalStateException("Repair shop is empty");
+        if (!loaded.isEmpty() && loaded.contains(v)) {
+            loaded.remove(v);
+            v.setState(new OnRoad());
         }
-        if (!loaded.contains(v)) {
-            throw new IllegalArgumentException("Car is not in repair shop");
-        }
-        v.unload();
-        loaded.remove(v);
     }
 }

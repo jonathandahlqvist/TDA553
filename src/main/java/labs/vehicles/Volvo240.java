@@ -8,7 +8,6 @@ public class Volvo240 extends Vehicle {
 
     public Volvo240(Color clr, double x, double y){
         super(4, 100, clr, x, y);
-        setImage("pics/Volvo240.jpg");
     }
 
     protected double speedFactor(){

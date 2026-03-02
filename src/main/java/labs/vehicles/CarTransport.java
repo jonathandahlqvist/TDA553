@@ -43,6 +43,7 @@ public class CarTransport extends Vehicle {
             throw new IllegalStateException("Ramp is not lowered");
         }
 
+        car.setState(new OnTransport());
         parkedCars.push(car);
         car.setX(this.getX());
         car.setY(this.getY());
@@ -58,6 +59,7 @@ public class CarTransport extends Vehicle {
         }
 
         Vehicle P = parkedCars.pop();
+        P.setState(new OnRoad());
         P.setX(this.getX()+1);
         P.setY(this.getY());
     }
