@@ -7,7 +7,7 @@ public class Volvo240 extends Vehicle {
     private final static double trimFactor = 1.25;
 
     public Volvo240(Color clr, double x, double y){
-        super(4, 100, clr, x, y);
+        super(4, 140, clr, x, y);
     }
 
     protected double speedFactor(){

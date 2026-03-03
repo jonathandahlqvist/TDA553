@@ -13,7 +13,7 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel {
     // Initializes the panel
-    private Model model;
+    private final Model model;
     private final HashMap<Class<? extends Vehicle>, BufferedImage> vehicleImageMap;
     private final HashMap<Class<? extends Vehicle>, BufferedImage> repairShopImageMap;
 
@@ -27,15 +27,13 @@ public class DrawPanel extends JPanel {
         this.repairShopImageMap = createRepairShopImageMap();
     }
 
-
-
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (Vehicle vehicle: model.getCars()) {
+        for (Vehicle vehicle: model.getVehicles()) {
             g.drawImage(getVehicleImage(vehicle), (int) vehicle.getX(), (int) vehicle.getY(), null);
         }
 
-        for (RepairShop<? extends Vehicle> workshop: model.getWorkshops()) {
+        for (RepairShop<? extends Vehicle> workshop: model.getRepairShops()) {
             g.drawImage(getRepairShopImage(workshop), (int) workshop.getX(), (int) workshop.getY(), null);
         }
     }
@@ -58,7 +56,7 @@ public class DrawPanel extends JPanel {
         return map;
     }
 
-    public BufferedImage readImage(String imageurl) {
+    private BufferedImage readImage(String imageurl) {
         try {
             return ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(imageurl)));
         }
@@ -68,12 +66,13 @@ public class DrawPanel extends JPanel {
         }
     }
 
-    public BufferedImage getVehicleImage(Vehicle vehicle) {
+    private BufferedImage getVehicleImage(Vehicle vehicle) {
         var vehicleClass = vehicle.getClass();
         return vehicleImageMap.get(vehicleClass);
     }
 
-    public BufferedImage getRepairShopImage(RepairShop<? extends Vehicle> shop) {
-        return repairShopImageMap.get(shop.getSupportedType());
+    private BufferedImage getRepairShopImage(RepairShop<? extends Vehicle> shop) {
+        var type = shop.getSupportedType();
+        return repairShopImageMap.get(type);
     }
 }

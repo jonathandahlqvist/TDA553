@@ -7,11 +7,7 @@ public class View implements Observer{
     private static final int X = 800;
     private static final int Y = 800;
     private final JFrame frame = new JFrame();
-
-
-    private Model model;
-
-    DrawPanel drawPanel;
+    private final DrawPanel drawPanel;
 
     JPanel controlPanel = new JPanel();
     JPanel gasPanel = new JPanel();
@@ -34,19 +30,16 @@ public class View implements Observer{
 
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
+    JButton addCarButton = new JButton("Add new car");
+    JButton removeCarButton = new JButton("Remove car");
 
     public View(String title, Model model) {
-        this.model = model;
-
         frame.setTitle(title);
         frame.setPreferredSize(new Dimension(X,Y));
-        frame.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-
+        frame.setLayout(new BorderLayout());
         drawPanel = new DrawPanel(X, Y-240, model);
-
         initComponents();
-
-        frame.add(drawPanel);
+        frame.add(drawPanel, BorderLayout.CENTER);
 
         frame.pack();
 
@@ -60,80 +53,92 @@ public class View implements Observer{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void initComponents() {
-        gasPanel.setLayout(new BorderLayout());
-        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
-        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
+    private void initComponents() {
 
-        frame.add(gasPanel);
-
-        controlPanel.setLayout(new GridLayout(2,4));
+        controlPanel.setLayout(new GridLayout(2,6,10,10));
 
         controlPanel.add(gasButton, 0);
-        controlPanel.add(turboOnButton, 1);
-        controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
+        controlPanel.add(brakeButton, 1);
+
+        controlPanel.add(turboOnButton, 2);
+        controlPanel.add(turboOffButton, 3);
+        controlPanel.add(liftBedButton, 4);
         controlPanel.add(lowerBedButton, 5);
-        controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
-        frame.add(controlPanel);
-        controlPanel.setBackground(Color.CYAN);
 
-        startButton.setBackground(Color.blue);
+        gasPanel.setLayout(new BorderLayout());
+        gasPanel.setBackground(Color.white);
+        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
+        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
+        controlPanel.add(gasPanel, 6);
+
         startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X/5-15,200));
-        frame.add(startButton);
+        controlPanel.add(startButton, 7);
 
-        stopButton.setBackground(Color.red);
-        stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X/5-15,200));
-        frame.add(stopButton);
-    }
+        stopButton.setForeground(Color.red);
+        controlPanel.add(stopButton, 8);
+
+        addCarButton.setForeground(Color.green);
+        controlPanel.add(addCarButton, 9);
+
+        removeCarButton.setForeground(Color.red);
+        controlPanel.add(removeCarButton, 10);
+
+        controlPanel.setPreferredSize(new Dimension(X, 200));
+        controlPanel.setBackground(Color.CYAN);
+        frame.add(controlPanel, BorderLayout.SOUTH);    }
 
     @Override
     public void actOnChange() {
         drawPanel.repaint();
     }
 
-    public JButton getStopButton() {
+    JButton getStopButton() {
         return stopButton;
     }
 
-    public JButton getStartButton() {
+    JButton getStartButton() {
         return startButton;
     }
 
-    public JButton getTurboOnButton() {
+    JButton getTurboOnButton() {
         return turboOnButton;
     }
 
-    public JButton getTurboOffButton() {
+    JButton getTurboOffButton() {
         return turboOffButton;
     }
 
-    public JButton getLiftBedButton() {
+    JButton getLiftBedButton() {
         return liftBedButton;
     }
 
-    public JButton getLowerBedButton() {
+    JButton getLowerBedButton() {
         return lowerBedButton;
     }
 
-    public JButton getGasButton() {
+    JButton getGasButton() {
         return gasButton;
     }
 
-    public JSpinner getGasSpinner() {
+    JButton getBrakeButton() {
+        return brakeButton;
+    }
+
+    JSpinner getGasSpinner() {
         return gasSpinner;
     }
 
-    public void setGasAmount(double amount) {
+    void setGasAmount(double amount) {
         this.gasAmount = amount;
     }
 
-    public double getGasAmount() {
+    double getGasAmount() {
         return gasAmount;
     }
+
+    JButton getAddCarButton() { return addCarButton; }
+
+    JButton getRemoveCarButton() { return removeCarButton; }
 }
 
 

@@ -7,16 +7,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Controller extends JComponent {
-    private Model model;
-    private View view;
+    private final Model model;
+    private final View view;
 
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
-        initComponents();
+        initListeners();
     }
 
-    private void initComponents() {
+    private void initListeners() {
         view.getGasButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -24,7 +24,7 @@ public class Controller extends JComponent {
             }
         });
 
-        view.brakeButton.addActionListener(new ActionListener() {
+        view.getBrakeButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.brake(view.getGasAmount());
@@ -59,7 +59,6 @@ public class Controller extends JComponent {
             }
         });
 
-
         view.getStartButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,6 +76,20 @@ public class Controller extends JComponent {
         view.getGasSpinner().addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 view.setGasAmount((int) ((JSpinner)e.getSource()).getValue());
+            }
+        });
+
+        view.getAddCarButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.createRandomCar();
+            }
+        });
+
+        view.getRemoveCarButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.removeCar();
             }
         });
     }

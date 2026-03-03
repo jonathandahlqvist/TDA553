@@ -22,7 +22,6 @@ public abstract class Vehicle extends Element implements Movable {
         stopEngine();
     }
 
-
     //Base methods
     public void gas(double amount){
         state.gas(this, amount);
@@ -43,9 +42,6 @@ public abstract class Vehicle extends Element implements Movable {
     public void turnRight() {
         state.turnRight(this);
     }
-
-
-
 
     // Internal helper methods
     protected void rotateLeft() {
@@ -83,8 +79,6 @@ public abstract class Vehicle extends Element implements Movable {
 
     protected abstract double speedFactor();
 
-
-
     //Getters
     public VehicleState getState() {
         return state;
@@ -109,8 +103,6 @@ public abstract class Vehicle extends Element implements Movable {
     public Color getColor(){
         return clr;
     }
-
-
 
     //Setters
     public void setState(VehicleState state){
@@ -140,6 +132,4 @@ public abstract class Vehicle extends Element implements Movable {
     public int getDirection() {
         return direction;
     }
-
-
 }

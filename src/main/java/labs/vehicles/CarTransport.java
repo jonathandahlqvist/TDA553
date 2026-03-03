@@ -7,8 +7,8 @@ public class CarTransport extends Vehicle {
     private Ramp ramp;
     private final Stack<Vehicle> parkedCars;
 
-    public CarTransport(int nrDoors, double enginePower, Color clr, double x, double y) {
-        super(nrDoors, enginePower, clr, x, y);
+    public CarTransport(Color clr, double x, double y) {
+        super(2, 200, clr, x, y);
         ramp = new Ramp();
         parkedCars = new Stack<>();
     }

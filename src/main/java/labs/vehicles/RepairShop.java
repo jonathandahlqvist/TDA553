@@ -11,7 +11,6 @@ public class RepairShop<T extends Vehicle> extends Element {
         this(capacity, 0, 0, supportedType); // Default position
     }
 
-
     public RepairShop(int capacity, double x, double y, Class<T> supportedType) {
         super(x, y);
         this.capacity = capacity;
